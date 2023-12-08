@@ -3,11 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		2B674EC524AE80861F37CE5D /* Pods_CollectionDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AA9E88D70EEF6F37AAE7102 /* Pods_CollectionDemo.framework */; };
+		4263DE4F2B0D3E7E002B63B9 /* NativoAPSViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4263DE4E2B0D3E7E002B63B9 /* NativoAPSViewCell.swift */; };
+		4263DE532B0D3E97002B63B9 /* NativoDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4263DE502B0D3E97002B63B9 /* NativoDelegate.swift */; };
 		A7A8E12F21ACB09200CF37F6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A8E12E21ACB09200CF37F6 /* AppDelegate.swift */; };
 		A7A8E13421ACB09200CF37F6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7A8E13221ACB09200CF37F6 /* Main.storyboard */; };
 		A7A8E13621ACB09300CF37F6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A7A8E13521ACB09300CF37F6 /* Assets.xcassets */; };
@@ -32,6 +34,8 @@
 
 /* Begin PBXFileReference section */
 		33A548809BE197BBCA6D22F9 /* Pods-CollectionDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CollectionDemo.release.xcconfig"; path = "Target Support Files/Pods-CollectionDemo/Pods-CollectionDemo.release.xcconfig"; sourceTree = "<group>"; };
+		4263DE4E2B0D3E7E002B63B9 /* NativoAPSViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NativoAPSViewCell.swift; sourceTree = "<group>"; };
+		4263DE502B0D3E97002B63B9 /* NativoDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NativoDelegate.swift; sourceTree = "<group>"; };
 		52A49D50EF93A9E62D5CF4A1 /* Pods-CollectionDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CollectionDemo.debug.xcconfig"; path = "Target Support Files/Pods-CollectionDemo/Pods-CollectionDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		8AA9E88D70EEF6F37AAE7102 /* Pods_CollectionDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CollectionDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7A8E12B21ACB09200CF37F6 /* CollectionDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CollectionDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -95,6 +99,8 @@
 		A7A8E12D21ACB09200CF37F6 /* CollectionDemo */ = {
 			isa = PBXGroup;
 			children = (
+				4263DE502B0D3E97002B63B9 /* NativoDelegate.swift */,
+				4263DE4E2B0D3E7E002B63B9 /* NativoAPSViewCell.swift */,
 				A7A8E12E21ACB09200CF37F6 /* AppDelegate.swift */,
 				A7A8E14A21ACB0CA00CF37F6 /* PubCollectionViewController.swift */,
 				A7A8E14C21ACB2D500CF37F6 /* PubCollectionViewCell.swift */,
@@ -205,16 +211,11 @@
 			files = (
 			);
 			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-CollectionDemo/Pods-CollectionDemo-frameworks.sh",
-				"${PODS_ROOT}/NativoSDK/Framework/NativoSDK.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-CollectionDemo/Pods-CollectionDemo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NativoSDK.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-CollectionDemo/Pods-CollectionDemo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -228,8 +229,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4263DE4F2B0D3E7E002B63B9 /* NativoAPSViewCell.swift in Sources */,
 				A7FC4592230488FB00D2F8AA /* ArticleViewController.swift in Sources */,
 				A7A8E14B21ACB0CA00CF37F6 /* PubCollectionViewController.swift in Sources */,
+				4263DE532B0D3E97002B63B9 /* NativoDelegate.swift in Sources */,
 				A7A8E12F21ACB09200CF37F6 /* AppDelegate.swift in Sources */,
 				A7A8E14D21ACB2D500CF37F6 /* PubCollectionViewCell.swift in Sources */,
 			);

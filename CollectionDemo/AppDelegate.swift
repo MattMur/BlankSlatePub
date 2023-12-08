@@ -6,15 +6,25 @@
 //
 
 import UIKit
+import DTBiOSSDK
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    let appID = "c5f20fe6e37146b08749d09bb2b6a4dd"
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        // Initialize Amazon SDK
+        let dtb = DTBAds.sharedInstance()
+        dtb.setAppKey(appID)
+        dtb.useGeoLocation = true
+        dtb.setLogLevel(DTBLogLevelAll)
+        dtb.testMode = true
+        dtb.setAPSPublisherExtendedIdFeatureEnabled(true)
+        
         return true
     }
 

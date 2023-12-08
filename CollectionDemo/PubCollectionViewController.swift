@@ -6,21 +6,41 @@
 //
 
 import UIKit
+import NativoSDK
 
 
-class PubCollectionViewController: UICollectionViewController {
+class PubCollectionViewController: UICollectionViewController, NtvSectionDelegate  {
     
     var feedImgCache = Dictionary<URL, UIImage>()
     
     @IBOutlet weak var collectionLayout: UICollectionViewFlowLayout! {
         didSet {
             collectionLayout.itemSize = CGSize(width: 342.0, height: 300.0)
+            //collectionLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         }
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        NativoSDK.enableTestAdvertisements(with: NtvTestAdType.display)
+        NativoSDK.setSectionDelegate(self, forSection: "www.mypub.com/headlines")
+        NativoSDK.register(UINib(nibName: "NativoAdView", bundle: nil), for: .native)
+        //self.collectionView.register(NtvCollectionViewCell.classForCoder(), forCellWithReuseIdentifier: "nativocell")
+        self.collectionView.register(NativoAPSViewCell.classForCoder(), forCellWithReuseIdentifier: "apscell")
+        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(
+            title: "Reload",
+            style: .plain,
+            target: self,
+            action: #selector(reloadButtonTapped)
+        )
     }
+    
+    @objc func reloadButtonTapped() {
+        self.collectionView.reloadData()
+    }
+    
 
     // MARK: UICollectionViewDataSource
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -32,23 +52,34 @@ class PubCollectionViewController: UICollectionViewController {
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    
-        // Dequeue the cell
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath);
         
-        // Setup Cell
-        if let articleCell: PubCollectionViewCell = cell as? PubCollectionViewCell{
-            articleCell.titleLabel.text = "Lorum Ipsom"
-            articleCell.authorNameLabel.text = "John"
-            articleCell.previewTextLabel.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
-            let imgUrl = URL.init(string: "https://images.unsplash.com/photo-1527664557558-a2b352fcf203?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=4341976025ae49162643ccdb47a72a4d&w=1000&q=80")
-            let authorUrl = URL.init(string: "https://www.logolynx.com/images/logolynx/6a/6aa959dca0e6c62f593e94e02332a67f.jpeg")
-            getAsyncImage(forUrl: imgUrl!) { (img) in
-                articleCell.adImageView.image = img
+        let cell : UICollectionViewCell;
+        
+
+        if (indexPath.row == 5) {
+            print("Loading collection APS cell...")
+            cell = collectionView.dequeueReusableCell(withReuseIdentifier: "apscell", for: indexPath)
+        }
+        else {
+            
+            // Dequeue the cell
+            cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath);
+            
+            // Setup Cell
+            if let articleCell: PubCollectionViewCell = cell as? PubCollectionViewCell{
+                articleCell.titleLabel.text = "Lorum Ipsom"
+                articleCell.authorNameLabel.text = "John"
+                articleCell.previewTextLabel.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
+                let imgUrl = URL.init(string: "https://images.unsplash.com/photo-1527664557558-a2b352fcf203?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=4341976025ae49162643ccdb47a72a4d&w=1000&q=80")
+                let authorUrl = URL.init(string: "https://www.logolynx.com/images/logolynx/6a/6aa959dca0e6c62f593e94e02332a67f.jpeg")
+                getAsyncImage(forUrl: imgUrl!) { (img) in
+                    articleCell.adImageView.image = img
+                }
+                getAsyncImage(forUrl: authorUrl!) { (authorimg) in
+                    articleCell.authorImageView.image = authorimg
+                }
             }
-            getAsyncImage(forUrl: authorUrl!) { (authorimg) in
-                articleCell.authorImageView.image = authorimg
-            }
+            
         }
         
         return cell
@@ -77,6 +108,19 @@ class PubCollectionViewController: UICollectionViewController {
                 }
             }
         }
+    }
+    
+    
+    func section(_ sectionUrl: String, didReceiveAd didGetFill: Bool) {
+        
+    }
+    
+    func section(_ sectionUrl: String, didAssignAd adData: NtvAdData, toLocation location: Any, container: UIView) {
+        self.collectionView.reloadData()
+    }
+    
+    func section(_ sectionUrl: String, didFailAdAtLocation location: Any?, in view: UIView?, withError errMsg: String?, container: UIView?) {
+        
     }
 }
 
