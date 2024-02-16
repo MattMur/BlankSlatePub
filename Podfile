@@ -6,7 +6,6 @@ target 'CollectionDemo' do
   use_frameworks!
 
   # Pods for CollectionDemo
-  pod 'NativoSDK', '7.2.0'
   pod 'AmazonPublisherServicesSDK', '~>4.7'
 
 end

@@ -6,10 +6,8 @@
 //
 
 import UIKit
-import NativoSDK
 
-
-class PubCollectionViewController: UICollectionViewController, NtvSectionDelegate  {
+class PubCollectionViewController: UICollectionViewController  {
     
     var feedImgCache = Dictionary<URL, UIImage>()
     
@@ -23,9 +21,6 @@ class PubCollectionViewController: UICollectionViewController, NtvSectionDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NativoSDK.enableTestAdvertisements(with: NtvTestAdType.display)
-        NativoSDK.setSectionDelegate(self, forSection: "www.mypub.com/headlines")
-        NativoSDK.register(UINib(nibName: "NativoAdView", bundle: nil), for: .native)
         //self.collectionView.register(NtvCollectionViewCell.classForCoder(), forCellWithReuseIdentifier: "nativocell")
         self.collectionView.register(NativoAPSViewCell.classForCoder(), forCellWithReuseIdentifier: "apscell")
         
@@ -110,17 +105,5 @@ class PubCollectionViewController: UICollectionViewController, NtvSectionDelegat
         }
     }
     
-    
-    func section(_ sectionUrl: String, didReceiveAd didGetFill: Bool) {
-        
-    }
-    
-    func section(_ sectionUrl: String, didAssignAd adData: NtvAdData, toLocation location: Any, container: UIView) {
-        self.collectionView.reloadData()
-    }
-    
-    func section(_ sectionUrl: String, didFailAdAtLocation location: Any?, in view: UIView?, withError errMsg: String?, container: UIView?) {
-        
-    }
 }
 
